@@ -1,0 +1,24 @@
+.DS_Store
+
+# dependencies
+/node_modules
+/packages/*/node_modules
+package-lock.json
+
+# logs and pids
+*.log
+pids
+
+# cache
+*.cache
+.eslintcache
+.babelcache
+
+# coverage
+.nyc_output
+coverage
+
+# project files
+.idea/
+
+.env

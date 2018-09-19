@@ -1,0 +1,21 @@
+{
+  "name": "atm-demo",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Jan Gnezda",
+  "license": "MIT",
+  "engines": {
+    "node": "8.11.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "develop:api": "yarn workspace @atm/api develop",
+    "develop:web": "yarn workspace @atm/web develop",
+    "develop": "npm-run-all --parallel develop:api develop:web"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.3"
+  }
+}
