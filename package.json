@@ -13,7 +13,10 @@
   "scripts": {
     "develop:api": "yarn workspace @atm/api develop",
     "develop:web": "yarn workspace @atm/web develop",
-    "develop": "npm-run-all --parallel develop:api develop:web"
+    "develop": "npm-run-all --parallel develop:api develop:web",
+    "migrate": "yarn workspace @atm/api migrate",
+    "migration:create": "yarn workspace @atm/api migration:create",
+    "demo:data": "yarn workspace @atm/api demo:data"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.3"
