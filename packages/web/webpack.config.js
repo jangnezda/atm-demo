@@ -25,6 +25,9 @@ module.exports = {
   devServer: {
     contentBase: './dist',
     hot: true,
-	port: 3000
+	port: 3000,
+    proxy: {
+      '/api': 'http://localhost:3001'
+    }
   }
 };
