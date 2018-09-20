@@ -9,7 +9,7 @@ module.exports = (db) => {
 
   const findAccount = (req, res, next) => {
     const number = req.params.number;
-	const pin = req.query.pin || '';
+    const pin = req.query.pin || '';
 
     return db.models.accounts.findByNumberAndPin(number, pin)
     .then(account => {
@@ -38,8 +38,8 @@ module.exports = (db) => {
   app.get('/accounts/:number', findAccount, (req, res, next) => res.send(mapAccount(req.account)));
 
   app.post('/accounts/:number/withdraw/:amount(\\d+)', findAccount, (req, res, next) => {
-	const amount = Number(req.params.amount);
-	const { account } = req;
+    const amount = Number(req.params.amount);
+    const { account } = req;
 
     if (!amount || amount <= 0) {
       return res.sendStatus(400);

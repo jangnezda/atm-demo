@@ -41,14 +41,11 @@ app.use('/static', express.static(path.resolve(rootPath, 'public', 'static')));
 
 app.use(express.static(path.resolve(rootPath, 'dist')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(rootPath, 'dist', 'index.html'));
-});
-
-// Pass API app as middleware
+// Register api endpoints
 app.use('/api', api(db));
 
 if (NODE_ENV === 'production') {
+  // Every other path handled by frontend
   app.use('*', (req, res) => {
     res.sendFile(path.join(rootPath, 'dist', 'index.html'));
   });
