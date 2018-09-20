@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { api } from './api';
 import Atm from './components/Atm';
 
 ReactDOM.render(
-  <Atm />,
+  <Atm api={api} />,
   document.getElementById('app')
 );
 

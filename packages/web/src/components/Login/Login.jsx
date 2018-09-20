@@ -2,13 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Button, Label, Input } from '../FormElements';
-
-const Title = styled.div`
-  font-size: 1.3rem;
-  text-align: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-`;
+import Title from '../Title';
 
 class Login extends React.Component {
   constructor(props) {
@@ -41,6 +35,7 @@ class Login extends React.Component {
           type='text'
           maxLength='10'
           size='10'
+          required
           value={account}
           onChange={e => this.onChange({ account: e.target.value })}
         />
@@ -50,12 +45,13 @@ class Login extends React.Component {
           type='password'
           maxLength='4'
           size='4'
+          required
           value={pin}
           onChange={e => this.onChange({ pin: e.target.value })}
         />
 
         <Button
-          onClick={() => this.props.onClick(this.state.account, this.state.pin)}
+          onClick={() => this.props.onContinue(this.state.account, this.state.pin)}
         >
           Continue
         </Button>
