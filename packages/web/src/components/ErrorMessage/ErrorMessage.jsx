@@ -3,11 +3,15 @@ import React from 'react';
 import { Button, Label } from '../FormElements';
 import Title from '../Title';
 
-const ErrorMessage = ({ onBack }) => (
+const ErrorMessage = ({ status, message, onBack }) => (
   <React.Fragment>
     <Title>Error occured</Title>
 
-    <Label>The account number or pin is invalid.</Label>
+    <Label>
+      {status && status === 404 && 'The account number or pin is invalid.'}
+
+      {(!status || status !== 404) && message}
+    </Label>
 
     <Button
       onClick={onBack}

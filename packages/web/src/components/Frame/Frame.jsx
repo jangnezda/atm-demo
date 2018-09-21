@@ -23,7 +23,7 @@ const Title = styled.div`
 `;
 
 const Inner = styled.div`
-  background-color: #D6DBDF;
+  background-color: ${props => props.isError ? '#f1948a' : '#d6dbdf'};
   margin: 0 2rem;
   padding: 1rem 2rem 1rem 2rem;
   border-radius: 0.3rem;
@@ -31,10 +31,10 @@ const Inner = styled.div`
   font-family: monospace;
 `;
 
-const Frame = ({ children }) => (
+const Frame = ({ isError = false, children }) => (
   <Outer>
     <Title>ATM</Title>
-    <Inner>{children}</Inner>
+    <Inner isError={isError}>{children}</Inner>
   </Outer>
 );
 

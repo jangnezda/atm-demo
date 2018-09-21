@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Frame from '../Frame';
 import Login from '../Login';
+import Account from '../Account';
 import ErrorMessage from '../ErrorMessage';
 
 class Atm extends React.Component {
@@ -11,33 +12,55 @@ class Atm extends React.Component {
 
     this.state = {
       account: null,
+      pin: null,
       error: null,
     };
 
     this.loadAccount = this.loadAccount.bind(this);
+    this.withdrawAmount = this.withdrawAmount.bind(this);
   }
 
   loadAccount(number, pin) {
-    this.props.api.getAccount(number, pin)
-      .then(account => this.setState({ ...this.state, account }))
+    return this.handleResult(pin, this.props.api.getAccount(number, pin));
+  }
+
+  withdrawAmount(amount) {
+    const { number, pin } = this.state.account;
+
+    return this.handleResult(pin, this.props.api.withdraw(number, pin, amount));
+  }
+
+  handleResult(pin, promise) {
+    return promise
+      .then(account => this.setState({ ...this.state, account: { ... account, pin } }))
       .catch(error => this.setState({ ...this.state, error }));
   }
 
   render() {
-    if (this.state.error) {
+    const { error, account } = this.state;
+
+    if (error) {
       return (
-        <Frame>
+        <Frame isError>
           <ErrorMessage
-            status={this.state.error.response.status}
-            message={this.state.error.message}
+            status={error.response.status}
+            message={error.response.data || error.message}
             onBack={() => this.setState({ ...this.state, error: null })}
           />
         </Frame>
       );
     }
 
-    if (this.state.account) {
-      return (<Frame>I can has account</Frame>);
+    if (account) {
+      return (
+        <Frame isError={account.frozen}>
+          <Account
+            account={account}
+            onQuit={() => this.setState({ account: null, error: null })}
+            onWithdraw={this.withdrawAmount}
+          />
+        </Frame>
+      );
     }
 
     return (

@@ -16,11 +16,13 @@ class Login extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(change) {
-    this.setState({
-      ...this.state,
-      ...change,
-    });
+  onChange(value, field) {
+    if (!isNaN(value)) {
+      this.setState({
+        ...this.state,
+        [field]: value,
+      });
+    }
   }
 
   render() {
@@ -37,7 +39,7 @@ class Login extends React.Component {
           size='10'
           required
           value={account}
-          onChange={e => this.onChange({ account: e.target.value })}
+          onChange={e => this.onChange(e.target.value, 'account')}
         />
 
         <Label>Enter PIN:</Label>
@@ -47,7 +49,7 @@ class Login extends React.Component {
           size='4'
           required
           value={pin}
-          onChange={e => this.onChange({ pin: e.target.value })}
+          onChange={e => this.onChange(e.target.value, 'pin')}
         />
 
         <Button
