@@ -40,10 +40,11 @@ class Account extends React.Component {
 
     this.state = {
       withdraw: false,
-      amount: null,
+      amount: '',
     };
 
     this.onChange = this.onChange.bind(this);
+    this.goToAccount= this.goToAccount.bind(this);
   }
 
   onChange(change) {
@@ -54,7 +55,7 @@ class Account extends React.Component {
   }
 
   goToAccount() {
-    this.setState({ ...this.state, withdraw: false });
+    this.setState({ ...this.state, withdraw: false, amount: '' });
   }
 
   render() {
@@ -69,12 +70,12 @@ class Account extends React.Component {
           <Label>Enter the desired amount:</Label>
           <Input
             type='text'
-            maxLength='5'
-            size='5'
+            maxLength='6'
+            size='8'
             required
             value={amount}
             onChange={e => {
-              if (!isNaN(e.target.value)) {
+              if (!isNaN(e.target.value) || Number(e.target.value) > 0) {
                 this.setState({ amount: e.target.value });
               }
             }}
@@ -97,11 +98,11 @@ class Account extends React.Component {
       <React.Fragment>
         <Title>Hello {account.user.firstName}</Title>
 
-		{account.frozen && (
+        {account.frozen && (
           <Label>This account is frozen! You cannot withdraw money.</Label>
         )}
 
-        <Label>Your account&apos;s balance is {account.balance} DKK.</Label>
+        <Label>Your account&apos;s balance is<br /> {account.balance} DKK.</Label>
 
         <Buttons
           backLabel='Quit'

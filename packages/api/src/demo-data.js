@@ -17,7 +17,7 @@ const users = [
       {
         number: '1111111111',
         pin: '0000',
-        balance: 1000,
+        balance: 10000,
         frozen: false,
       },
     ],
@@ -36,7 +36,7 @@ const users = [
       {
         number: '3333333333',
         pin: '0000',
-        balance: 10000,
+        balance: 30000,
         frozen: false,
       },
     ],
