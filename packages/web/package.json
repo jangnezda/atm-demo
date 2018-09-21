@@ -2,13 +2,15 @@
   "name": "@atm/web",
   "version": "1.0.0",
   "scripts": {
-    "develop": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "develop": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "test": "mocha src/**/*.test.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "mocha": "^5.2.0",
     "react-hot-loader": "^4.3.3",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
