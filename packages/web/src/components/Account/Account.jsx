@@ -59,7 +59,7 @@ class Account extends React.Component {
   }
 
   render() {
-    const { account, onQuit, onWithdraw } = this.props;
+    const { account, hasChange, onQuit, onWithdraw } = this.props;
     const { withdraw, amount } = this.state;
 
     if (withdraw) {
@@ -102,14 +102,19 @@ class Account extends React.Component {
           <Label>This account is frozen! You cannot withdraw money.</Label>
         )}
 
-        <Label>Your account&apos;s balance is<br /> {account.balance} DKK.</Label>
+        <Label>
+          Your account&apos;s balance is<br /> {account.balance} DKK.
+          {hasChange && ' Please take your money below.'}
+        </Label>
 
-        <Buttons
-          backLabel='Quit'
-          isFrozen={account.frozen}
-          onBack={onQuit}
-          onWithdraw={() => this.setState({ ...this.state, withdraw: true })}
-        />
+        {!hasChange && (
+          <Buttons
+            backLabel='Quit'
+            isFrozen={account.frozen}
+            onBack={onQuit}
+            onWithdraw={() => this.setState({ ...this.state, withdraw: true })}
+          />
+        )}
       </React.Fragment>
     );
   }

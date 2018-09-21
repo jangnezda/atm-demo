@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Frame from '../Frame';
+import Bins from '../Bins';
 import Login from '../Login';
 import Account from '../Account';
 import ErrorMessage from '../ErrorMessage';
@@ -15,10 +16,12 @@ class Atm extends React.Component {
       pin: null,
       error: null,
       cashReserve: null,
+      change: null,
     };
 
     this.loadAccount = this.loadAccount.bind(this);
     this.withdrawAmount = this.withdrawAmount.bind(this);
+    this.quit = this.quit.bind(this);
   }
 
   loadAccount(number, pin) {
@@ -69,18 +72,23 @@ class Atm extends React.Component {
         ...this.state,
         account: { ...account, pin },
         cashReserve: this.props.cash.subtractChange(change, cashReserve),
+        change,
       }))
       .catch(error => this.goToError(error));
   }
 
-  handleResult(pin, promise) {
-    return promise
-      .then(account => this.setState({ ...this.state, account: { ... account, pin } }))
-      .catch(error => this.goToError(error));
+  quit() {
+    this.setState({
+      account: null,
+      pin: null,
+      error: null,
+      cashReserve: null,
+      change: null,
+    });
   }
 
   render() {
-    const { error, account } = this.state;
+    const { error, account, change } = this.state;
 
     if (error) {
       const { response, message } = error;
@@ -98,18 +106,26 @@ class Atm extends React.Component {
 
     if (account) {
       return (
-        <Frame isError={account.frozen}>
-          <Account
-            account={account}
-            onQuit={() => this.setState({
-              account: null,
-              pin: null,
-              error: null,
-              cashReserve: null,
-            })}
-            onWithdraw={this.withdrawAmount}
-          />
-        </Frame>
+        <React.Fragment>
+          <Frame
+            isError={account.frozen}
+            showShadow={!change}
+          >
+            <Account
+              account={account}
+              onQuit={this.quit}
+              onWithdraw={this.withdrawAmount}
+              hasChange={!!change}
+            />
+          </Frame>
+          {change && (
+            <Bins
+              change={change}
+              cash={this.props.cash}
+              onPayout={this.quit}
+            />
+          )}
+        </React.Fragment>
       );
     }
 

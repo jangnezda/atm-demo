@@ -7,7 +7,7 @@ const Outer = styled.div`
   margin: auto;
   margin-top: 3rem;
   border: black solid 1px;
-  box-shadow: 0 10px 6px -6px black;
+  box-shadow: ${props => props.showShadow ? '0 10px 6px -6px black' : 'none'};
   background-color: #34495e;
 `;
 
@@ -31,8 +31,8 @@ const Inner = styled.div`
   font-family: monospace;
 `;
 
-const Frame = ({ isError = false, children }) => (
-  <Outer>
+const Frame = ({ isError = false, showShadow = true, children }) => (
+  <Outer showShadow={showShadow}>
     <Title>ATM</Title>
     <Inner isError={isError}>{children}</Inner>
   </Outer>
