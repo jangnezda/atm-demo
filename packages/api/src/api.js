@@ -61,8 +61,7 @@ module.exports = (db) => {
 
   // Four arguments are required to indicate the middleware as an error handler.
   app.use((err, req, res, next) => {
-    const errorMessage = res.sentry || err.message;
-    res.status(500).json({ error: errorMessage });
+    res.status(500).json({ error: err.message });
   });
 
   return app;

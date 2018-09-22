@@ -82,7 +82,6 @@ const subtractChange = (change, cashReserve) =>
     return acc;
   }, []);
 
-// export const cash = {
 module.exports = {
   getReserve,
   getTotal,

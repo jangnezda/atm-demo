@@ -49,7 +49,7 @@ const insertData = async () => {
       const { id } = await db.models.users.create(user);
     
       for (const account of user.accounts) {
-	    await db.models.accounts.create(Object.assign({}, account, { userId: id }));
+        await db.models.accounts.create(Object.assign({}, account, { userId: id }));
       }
     }
   } finally {

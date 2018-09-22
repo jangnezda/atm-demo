@@ -56,7 +56,7 @@ if (require.main === module) {
 
   app.listen(port, (error) => {
     if (!error) {
-	  console.log(`Running in ${NODE_ENV} mode`);
+      console.log(`Running in ${NODE_ENV} mode`);
       console.log(`Server started and listening on port ${port}`);
     }
   });
