@@ -59,6 +59,15 @@ module.exports = (db) => {
       .then(() => res.json(mapAccount(account)));
   });
 
+  // All other /api/* will 404
+  app.use((req, res, next) => {
+    if (!req.route) {
+      return res.status(404).send({ error: 'Api route not found' });
+    }
+
+    return next();
+  });
+
   // Four arguments are required to indicate the middleware as an error handler.
   app.use((err, req, res, next) => {
     res.status(500).json({ error: err.message });

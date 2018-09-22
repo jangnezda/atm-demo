@@ -36,13 +36,13 @@ app.use(compression());
 
 const rootPath = path.resolve('../web');
 
-app.use(express.static(path.resolve(rootPath, 'dist')));
-
 // Register api endpoints
 app.use('/api', api(db));
 
-// Every other path handled by frontend
-app.use('*', (req, res) => {
+app.use(express.static(path.resolve(rootPath, 'dist')));
+
+// Root path is handled by frontend
+app.use('/', (req, res) => {
   res.sendFile(path.join(rootPath, 'dist', 'index.html'));
 });
 
