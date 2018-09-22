@@ -34,22 +34,17 @@ app.use(helmet({
 }));
 app.use(compression());
 
-const rootPath = path.resolve('.');
-console.log('errr', rootPath);
-
-app.use('/static', express.static(path.resolve(rootPath, 'public', 'static')));
+const rootPath = path.resolve('../web');
 
 app.use(express.static(path.resolve(rootPath, 'dist')));
 
 // Register api endpoints
 app.use('/api', api(db));
 
-if (NODE_ENV === 'production') {
-  // Every other path handled by frontend
-  app.use('*', (req, res) => {
-    res.sendFile(path.join(rootPath, 'dist', 'index.html'));
-  });
-}
+// Every other path handled by frontend
+app.use('*', (req, res) => {
+  res.sendFile(path.join(rootPath, 'dist', 'index.html'));
+});
 
 if (require.main === module) {
   const port = PORT || 3001;
