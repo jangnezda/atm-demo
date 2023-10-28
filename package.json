@@ -2,7 +2,7 @@
   "name": "atm-demo",
   "private": true,
   "version": "1.0.0",
-  "author": "Jan Gnezda",
+  "author": "Jan Gnezda Pistorius",
   "license": "MIT",
   "engines": {
     "node": "8.11.1"
