@@ -17,6 +17,7 @@ const SIZES = {
 // Initial collection of notes and coins with
 // total amount of 14360. Change the counts
 // to increase or decrease payable amount of the ATM.
+// Dinni binni bonni
 const getReserve = () => ([
   { value: 1000, count: 5 },
   { value: 500, count: 10 },
